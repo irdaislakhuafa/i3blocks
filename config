@@ -1,0 +1,104 @@
+# For the benefit of emacs users: -*- shell-script -*-
+#
+#  _ _____ _     _            _
+# (_)___ /| |__ | | ___   ___| | _____
+# | | |_ \| '_ \| |/ _ \ / __| |/ / __|
+# | |___) | |_) | | (_) | (__|   <\__ \
+# |_|____/|_.__/|_|\___/ \___|_|\_\___/
+
+align=center
+separator=false
+color=#f8f8f2
+separator_block_width=15
+markup=pango
+
+#[programming_language]
+#full_text="{Java, Go}"
+#full_text="{Java, Go, JavaScript}"
+
+#[message]
+#full_text="Trust  me! You can do it, never give up"
+
+#[code]
+#command=sh ~/.config/i3blocks/mode/kelas.sh
+#interval=persist
+#label=<span color="#ffffff"> </span>
+
+#[linux]
+#full_text= Artix Linux
+
+# [music]
+# command=~/.config/i3blocks/scripts/music.sh 2> ~/.cache/mocp.log
+# interval=persist
+
+#[internet]
+#command=~/.config/i3blocks/scripts/internet.sh
+#interval=persist
+
+[wifi]
+command=~/.config/i3blocks/scripts/wifi.sh
+interval=persist
+label=<span color="#00aaff"> </span>
+
+[lan]
+# command=ip link | cut -d ":" -f 2 | grep usb0
+command=~/.config/i3blocks/scripts/lan.sh
+#instance=usb0
+interval=persist
+#label=<span color="#55aaff"> </span>
+
+#[recording]
+#command=~/.config/i3blocks/scripts/record.sh
+#interval=persist
+
+[printer]
+command=~/.config/i3blocks/scripts/printer.sh
+interval=persist
+
+[battery]
+command=~/.config/i3blocks/scripts/battery.sh
+interval=persist
+
+#[root]
+#command=df -h / | awk 'FNR==2 { gsub(/[A-Za-z]/, ""); printf "%i<span color=\"#ffff00\">GiB</span>\n", $4 }'
+#interval=3
+#label=<span color="#ffff00"> </span>
+
+[gpu_stats]
+command=nvidia-smi --query-gpu "memory.used" --format=csv,noheader | awk '{printf "%i<span color=\"#00ff00\"> MiB </span>", $0}' && nvidia-smi --query-gpu "memory.free" --format=csv,noheader | awk '{printf "%i<span color=\"#00ff00\"> MiB</span> ", $0}' && nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{ printf "%02i<span color=\"#00ff00\">%</span>", $0}' && nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk '{ printf " %i<span color=\"#00ff00\">°C</span>\n", $0}' 
+# command=~/.config/i3blocks/scripts/nvidia.sh
+interval=1
+label=<span color="#00ff00"><b>Nvidia </b></span>
+
+[brihgtness]
+command=~/.config/i3blocks/scripts/brightness.sh
+interval=persist
+
+[memory]
+interval=persist
+# command=echo $(free -h | grep Mem | awk 'FNR=2 {printf "%sB / %sB", $3,$7}')
+command=~/.config/i3blocks/scripts/ram.sh
+label=<span color="#55ffff"> </span>
+
+[swap]
+command=~/.config/i3blocks/scripts/swap.sh
+interval=persist
+label=<span color="#aaaaff"></span>
+
+[volume]
+command=/usr/bin/sh ~/.config/i3blocks/scripts/volume.sh
+interval=persist
+
+[temp]
+command=/usr/bin/sh ~/.config/i3blocks/scripts/temp.sh
+interval=persist
+
+[time]
+command=~/.config/i3blocks/scripts/clock.sh
+label=<span color="#55aaff"> </span>
+interval=persist
+
+[date]
+command=echo "$(date +%A) $(date +%d) $(date +%B) $(date +%Y)  "
+interval=3600
+label=<span color="#ff5555"> </span>
